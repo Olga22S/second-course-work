@@ -41,11 +41,36 @@ public class MathQuestionService implements QuestionService {
     @Override
     public Question getRandomQuestion() {
         logger.info("Generating math question.");
-        int firstNum = random.nextInt(100);
-        int secondNum = random.nextInt(100);
-        int answer = firstNum + secondNum;
-        Question question = new Question((firstNum + "+" + secondNum), String.valueOf(answer));
+        int a = random.nextInt(100);
+        int b = random.nextInt(100);
+        char operator = generateOperator();
+        int answer = getCalculatingResult(a, b, operator);
+        Question question = new Question(a + " " + operator + " " + b, String.valueOf(answer));
         logger.info("Math question was generated: " + question);
         return question;
+    }
+
+    private char generateOperator() {
+        char[] operators = {'+', '-', '*', '/'};
+        int index = random.nextInt(operators.length);
+        return operators[index];
+    }
+
+    private int getCalculatingResult(int a, int b, char operator) {
+        if (b == 0 && operator == '/') {
+            throw new IllegalArgumentException("It's forbidden to divide by zero!");
+        }
+        switch (operator) {
+            case '+':
+                return a + b;
+            case '-':
+                return a - b;
+            case '*':
+                return a * b;
+            case '/':
+                return a / b;
+            default:
+                throw new IllegalArgumentException("Not such operator");
+        }
     }
 }
