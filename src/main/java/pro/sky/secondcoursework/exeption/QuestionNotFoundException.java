@@ -3,10 +3,10 @@ package pro.sky.secondcoursework.exeption;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.BAD_REQUEST)
-public class NotFoundQuestionException extends RuntimeException{
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class QuestionNotFoundException extends RuntimeException {
 
-    public NotFoundQuestionException() {
+    public QuestionNotFoundException() {
         super("Question is not found!");
     }
 }

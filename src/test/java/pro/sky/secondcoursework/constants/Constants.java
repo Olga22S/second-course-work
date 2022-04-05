@@ -8,12 +8,12 @@ import java.util.List;
 public class Constants {
 
     public static final Question REMOVED =
-            new Question("What is variable?", "Named memory area");
+            new Question("What is a variable?", "Named memory area");
     public static final Question ADDED =
-            new Question("What is encapsulation?", "Hiding the implementation");
+            new Question("What is an encapsulation?", "Hiding the implementation");
 
-    public static final Collection<Question> QUESTIONS = List.of(
-            new Question("What is Spring?", "FrameWork"),
-            new Question("What is Map?", "Data structure"),
-            new Question("What is variable?", "Named memory area"));
+    public static final List<Question> QUESTIONS = List.of(
+            new Question("What is a Spring?", "FrameWork"),
+            new Question("What is a Map?", "Data structure"),
+            new Question("What is a variable?", "Named memory area"));
 }

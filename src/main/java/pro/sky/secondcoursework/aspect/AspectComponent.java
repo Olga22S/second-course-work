@@ -20,7 +20,7 @@ public class AspectComponent {
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
 
-        Object proceed = joinPoint.proceed();
+        Object execution = joinPoint.proceed();
 
         long executionTime = System.currentTimeMillis() - start;
         logger.info(joinPoint.getSignature() + " executed in " + executionTime + "ms");
@@ -28,6 +28,6 @@ public class AspectComponent {
                 .map(Object::toString)
                 .collect(Collectors.joining(","));
         logger.info("Args " + joinPoint + ", args= " + "[" + args + "]");
-        return proceed;
+        return execution;
     }
 }

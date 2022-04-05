@@ -1,30 +1,24 @@
 package pro.sky.secondcoursework.repository;
 
 import org.springframework.stereotype.Repository;
-import pro.sky.secondcoursework.exeption.AlreadyExistQuestionException;
-import pro.sky.secondcoursework.exeption.NotFoundQuestionException;
+import pro.sky.secondcoursework.exeption.QuestionExistsException;
+import pro.sky.secondcoursework.exeption.QuestionNotFoundException;
 import pro.sky.secondcoursework.model.Question;
 
 import javax.annotation.PostConstruct;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class JavaQuestionRepository implements QuestionRepository {
 
     private final Set<Question> questions = new HashSet<>();
 
-    public JavaQuestionRepository() {
-    }
-
     @Override
     public Question add(Question question) {
         if (questions.add(question)) {
             return question;
         }
-        throw new AlreadyExistQuestionException();
+        throw new QuestionExistsException();
     }
 
     @Override
@@ -32,20 +26,20 @@ public class JavaQuestionRepository implements QuestionRepository {
         if (questions.remove(question)) {
             return question;
         }
-        throw new NotFoundQuestionException();
+        throw new QuestionNotFoundException();
     }
 
     @Override
-    public Collection<Question> getAll() {
-        return Collections.unmodifiableCollection(questions);
+    public List<Question> getAll() {
+        return new ArrayList<>(questions);
     }
 
     @PostConstruct
     private void init() {
-        questions.add(new Question("What is Spring?", "FrameWork"));
-        questions.add(new Question("What is Map?", "Data structure"));
-        questions.add(new Question("What is variable?", "Named memory area"));
-        questions.add(new Question("What is encapsulation?", "Hiding the implementation"));
-        questions.add(new Question("What is recurse?", "Droch"));
+        questions.add(new Question("What is a Spring?", "FrameWork"));
+        questions.add(new Question("What is a Map?", "Data structure"));
+        questions.add(new Question("What is  a variable?", "Named memory area"));
+        questions.add(new Question("What is an encapsulation?", "Hiding the implementation"));
+        questions.add(new Question("What is a recurse?", "Droch"));
     }
 }

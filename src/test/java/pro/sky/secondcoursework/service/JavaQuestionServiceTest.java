@@ -8,9 +8,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pro.sky.secondcoursework.model.Question;
 import pro.sky.secondcoursework.repository.QuestionRepository;
 
-import java.util.Collection;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static pro.sky.secondcoursework.constants.Constants.*;
@@ -24,30 +24,31 @@ class JavaQuestionServiceTest {
     private JavaQuestionService service;
 
     @Test
-    void add() {
+    void shouldAddJavaQuestionByRepositoryWhenAddJavaQuestion() {
         service.add(ADDED);
         verify(questionRepository).add(ADDED);
     }
 
     @Test
-    void addByName() {
-        service.add("What is encapsulation?", "Hiding the implementation");
+    void shouldAddJavaQuestionByRepositoryWhenAddQuestionAndAnswerOnJava() {
+        service.add(ADDED.getQuestion(), ADDED.getAnswer());
         verify(questionRepository).add(ADDED);
     }
 
     @Test
-    void remove() {
+    void shouldRemoveJavaQuestionByRepositoryWhenRemoveJavaQuestion() {
         service.remove(REMOVED);
         verify(questionRepository).remove(REMOVED);
     }
 
+
     @Test
-    void getAll() {
-        Collection<Question> expected = QUESTIONS;
+    void shouldReturnAllJavaQuestionsWhenGetAll() {
+        List<Question> expected = QUESTIONS;
         when(questionRepository.getAll()).thenReturn(expected);
 
-        Collection<Question> result = service.getAll();
+        List<Question> result = service.getAll();
 
-        assertTrue(expected.containsAll(result));
+        assertEquals(expected, result);
     }
 }

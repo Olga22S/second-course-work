@@ -3,21 +3,18 @@ package pro.sky.secondcoursework.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import pro.sky.secondcoursework.exeption.GeneratingQuestionException;
 import pro.sky.secondcoursework.model.Question;
 import pro.sky.secondcoursework.repository.QuestionRepository;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
-
-import static java.util.Objects.isNull;
 
 @Service
 public class JavaQuestionService implements QuestionService {
 
     private final QuestionRepository questionRepository;
     private final Logger logger = LoggerFactory.getLogger(JavaQuestionService.class);
+    private final Random random = new Random();
 
     public JavaQuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
@@ -42,7 +39,7 @@ public class JavaQuestionService implements QuestionService {
     }
 
     @Override
-    public Collection<Question> getAll() {
+    public List<Question> getAll() {
         logger.info("Getting all java questions.");
         return questionRepository.getAll();
     }
@@ -50,16 +47,9 @@ public class JavaQuestionService implements QuestionService {
     @Override
     public Question getRandomQuestion() {
         logger.info("Generating random java question...");
-        int i = new Random().nextInt(questionRepository.getAll().size());
-        Question returnedQuestion = null;
-        Iterator<Question> iterator = questionRepository.getAll().iterator();
-        while (i-- >= 0) {
-            returnedQuestion = iterator.next();
-        }
-        if (!isNull(returnedQuestion)) {
-            logger.info("Random java question was gotten: " + returnedQuestion);
-            return returnedQuestion;
-        }
-        throw new GeneratingQuestionException();
+        int i = random.nextInt(questionRepository.getAll().size());
+        Question returnedQuestion = getAll().get(i);
+        logger.info("Random java question was gotten: " + returnedQuestion);
+        return returnedQuestion;
     }
 }

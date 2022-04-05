@@ -12,7 +12,7 @@ import pro.sky.secondcoursework.service.QuestionService;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/exam/java")
+@RequestMapping("/java")
 public class JavaQuestionController {
 
     private final QuestionService questionService;

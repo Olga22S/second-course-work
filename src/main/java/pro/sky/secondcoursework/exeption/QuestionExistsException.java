@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class GeneratingQuestionException extends RuntimeException {
+public class QuestionExistsException extends RuntimeException {
 
-    public GeneratingQuestionException() {
-        super("Generating question is fail!");
+    public QuestionExistsException() {
+        super("This question already exists!");
     }
 }
