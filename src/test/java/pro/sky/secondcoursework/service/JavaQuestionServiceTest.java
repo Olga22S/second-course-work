@@ -25,20 +25,20 @@ class JavaQuestionServiceTest {
 
     @Test
     void shouldAddJavaQuestionByRepositoryWhenAddJavaQuestion() {
-        service.add(ADDED);
-        verify(questionRepository).add(ADDED);
+        service.add(QUESTION_SECOND);
+        verify(questionRepository).add(QUESTION_SECOND);
     }
 
     @Test
     void shouldAddJavaQuestionByRepositoryWhenAddQuestionAndAnswerOnJava() {
-        service.add(ADDED.getQuestion(), ADDED.getAnswer());
-        verify(questionRepository).add(ADDED);
+        service.add(QUESTION_SECOND.getQuestion(), QUESTION_SECOND.getAnswer());
+        verify(questionRepository).add(QUESTION_SECOND);
     }
 
     @Test
     void shouldRemoveJavaQuestionByRepositoryWhenRemoveJavaQuestion() {
-        service.remove(REMOVED);
-        verify(questionRepository).remove(REMOVED);
+        service.remove(QUESTION_FIRST);
+        verify(questionRepository).remove(QUESTION_FIRST);
     }
 
 
