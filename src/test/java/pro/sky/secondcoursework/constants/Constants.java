@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Constants {
 
+    public static final String QUESTION = "What is a Map?";
+    public static final String ANSWER = "Data structure";
     public static final Question QUESTION_FIRST =
             new Question("What is a variable?", "Named memory area");
     public static final Question QUESTION_SECOND =
