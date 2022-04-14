@@ -17,6 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static pro.sky.secondcoursework.constants.Constants.ANSWER;
 import static pro.sky.secondcoursework.constants.Constants.QUESTION;
@@ -63,9 +64,13 @@ public class SecondCourseWorkApplicationWithMockTest {
         when(questionService.getAll()).thenReturn(expected);
         mockMvc.perform(
                         get("/java"))
+                .andDo(print())
                 .andExpectAll(
                         content().contentType(MediaType.APPLICATION_JSON),
                         status().isOk()
                 );
     }
 }
+
+//this.mockMvc.perform(get("/")).andExpect(cookie().value(COOKIE_NAME, "en-US"));
+//        this.mockMvc.perform(get("/")).andExpect(cookie().value(COOKIE_NAME, equalTo("en-US")));
