@@ -17,7 +17,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static pro.sky.secondcoursework.constants.Constants.ANSWER;
 import static pro.sky.secondcoursework.constants.Constants.QUESTION;
@@ -38,11 +37,9 @@ public class SecondCourseWorkApplicationWithMockTest {
         when(questionService.add(anyString(), anyString())).thenReturn(javaQuestion);
         mockMvc.perform(
                         get("/java/add?question=What is a Map?&answer=Data structure"))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.question").value(QUESTION),
-                        jsonPath("$.answer").value(ANSWER)
-                );
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.question").value(QUESTION))
+                .andExpect(jsonPath("$.answer").value(ANSWER));
     }
 
     @Test
@@ -51,11 +48,9 @@ public class SecondCourseWorkApplicationWithMockTest {
         when(questionService.remove(any(Question.class))).thenReturn(javaQuestion);
         mockMvc.perform(
                         get("/java/remove?question=What is a Map?&answer=Data structure"))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.question").value(QUESTION),
-                        jsonPath("$.answer").value(ANSWER)
-                );
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.question").value(QUESTION))
+                .andExpect(jsonPath("$.answer").value(ANSWER));
     }
 
     @Test
@@ -64,11 +59,8 @@ public class SecondCourseWorkApplicationWithMockTest {
         when(questionService.getAll()).thenReturn(expected);
         mockMvc.perform(
                         get("/java"))
-                .andDo(print())
-                .andExpectAll(
-                        content().contentType(MediaType.APPLICATION_JSON),
-                        status().isOk()
-                );
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
 
