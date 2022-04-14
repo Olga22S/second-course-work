@@ -53,25 +53,30 @@ class SecondCourseWorkApplicationTests {
 
     @Test
     public void testJavaControllerAdd() {
-        Question question = new Question("What is a Enum?", "A set of constants");
+        Question expected = new Question("What is a Enum?", "A set of constants");
 
-        assertEquals(restTemplate.getForObject(
+        Question result = restTemplate.getForObject(
                 "http://localhost:" + port + "/exam/java/add?question=What is a Enum?&answer=A set of constants",
-                Question.class), question);
+                Question.class);
+        assertEquals(expected, result);
     }
 
     @Test
     public void testJavaControllerRemove() {
-        Question question = new Question("What is a Map?", "Data structure");
+        Question expected = new Question("What is a Map?", "Data structure");
 
-        assertEquals(restTemplate.getForObject(
+        Question result = restTemplate.getForObject(
                 "http://localhost:" + port + "/exam/java/remove?question=What is a Map?&answer=Data structure",
-                Question.class), question);
+                Question.class);
+        assertEquals(expected, result);
     }
 
     @Test
     public void testGetAllJavaController() {
-        assertNotNull(restTemplate.getForObject("http://localhost:" + port + "/exam/java/", Collection.class));
+        Collection<Question> result =
+                restTemplate.getForObject("http://localhost:" + port + "/exam/java/", Collection.class);
+
+        assertNotNull(result);
     }
 
     @Test
